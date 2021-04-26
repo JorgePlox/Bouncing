@@ -6,7 +6,10 @@ public class LeaveZone : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        LevelGenerator.sharedInstance.AddLevelBlock();
-        LevelGenerator.sharedInstance.RemoveLevelBlock();
+        if (collision.tag == "Player")
+        {
+            LevelGenerator.sharedInstance.AddLevelBlock();
+            LevelGenerator.sharedInstance.RemoveLevelBlock();
+        }
     }
 }
