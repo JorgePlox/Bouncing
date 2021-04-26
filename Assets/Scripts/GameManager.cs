@@ -50,6 +50,9 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(GameState.inGame);
         PlayerController.sharedInstance.ResumeVelocity();
+
+        //wall
+        MovingWall.sharedInstance.MoveWall();
     }
 
 
@@ -58,6 +61,10 @@ public class GameManager : MonoBehaviour
     {
         PlayerController.sharedInstance.StartGame();
         SetGameState(GameState.inGame);
+        CameraFollow.sharedinstance.ResetCameraPosition();
+
+        //wall
+        MovingWall.sharedInstance.ResetWallPosition();
     }
 
 
@@ -73,6 +80,9 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(GameState.menu);
         PlayerController.sharedInstance.PauseVelocity();
+
+        //wall
+        MovingWall.sharedInstance.StopWall();
 
     }
 

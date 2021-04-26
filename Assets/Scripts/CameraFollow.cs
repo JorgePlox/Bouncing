@@ -13,10 +13,12 @@ public class CameraFollow : MonoBehaviour
 
     public Vector3 velocity = Vector3.zero;
 
+    public static CameraFollow sharedinstance;
 
     // Start is called before the first frame update
     void Awake()
     {
+        sharedinstance = this;
         Application.targetFrameRate = 60;
     }
 
@@ -27,5 +29,14 @@ public class CameraFollow : MonoBehaviour
         Vector3 destination = new Vector3(tarjet.position.x + offset.x, offset.y, -10);
 
         this.transform.position = Vector3.SmoothDamp(this.transform.position, destination, ref velocity, dampTime);
+    }
+
+
+
+    public void ResetCameraPosition()
+    {
+        Vector3 destination = new Vector3(tarjet.position.x + offset.x, offset.y, -10);
+
+        this.transform.position = destination;
     }
 }

@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
         ResumeVelocity();
         this.transform.position = startPosition;
 
+        LevelGenerator.sharedInstance.RemoveAllBlocks();
+        LevelGenerator.sharedInstance.GenerateInitialBLocks();
+
 
     }
 

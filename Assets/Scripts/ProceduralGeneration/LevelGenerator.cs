@@ -69,7 +69,7 @@ public class LevelGenerator : MonoBehaviour
     {
         LevelBlock oldestBlock = currentLevelBlocks[0];
         currentLevelBlocks.Remove(oldestBlock);
-        Destroy(oldestBlock);
+        Destroy(oldestBlock.gameObject);
     }
 
 
@@ -84,7 +84,7 @@ public class LevelGenerator : MonoBehaviour
 
     public void GenerateInitialBLocks()
     { 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             AddLevelBlock();
 
