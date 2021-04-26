@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     //Variable que referencia al propio GameManager
     public static GameManager sharedInstance;
 
+    //Variables de los canvases
+    public Canvas menuCanvas;
+
 
     private void Awake()
     {
@@ -90,13 +93,19 @@ public class GameManager : MonoBehaviour
     void SetGameState(GameState newGameState)
     {
         if (newGameState == GameState.menu)
-        { }
+        {
+            menuCanvas.enabled = true;
+        }
 
         else if (newGameState == GameState.inGame)
-        { }
+        {
+            menuCanvas.enabled = false;
+        }
 
         else if (newGameState == GameState.gameOver)
-        { }
+        {
+            menuCanvas.enabled = false;
+        }
 
         //Se asigna el estado nuevo
         this.currentGameState = newGameState;
