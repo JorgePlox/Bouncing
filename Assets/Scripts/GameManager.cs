@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public static GameManager sharedInstance;
 
     //Variables de los canvases
-    public Canvas menuCanvas;
+    public Canvas menuCanvas, gameCanvas, gameOverCanvas;
 
 
     private void Awake()
@@ -37,14 +37,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Start") && currentGameState == GameState.menu)
-            StartGame();
+        //if (Input.GetButtonDown("Start") && currentGameState == GameState.menu)
+        //    StartGame();
 
-        else if (Input.GetButtonDown("Start") && currentGameState == GameState.inGame)
-            BackToMenu();
+        //else if (Input.GetButtonDown("Start") && currentGameState == GameState.inGame)
+        //    BackToMenu();
 
-        else if (Input.GetButtonDown("Start") && currentGameState == GameState.gameOver)
-            ResetGame();
+        //else if (Input.GetButtonDown("Start") && currentGameState == GameState.gameOver)
+        //    ResetGame();
     }
 
 
@@ -95,16 +95,22 @@ public class GameManager : MonoBehaviour
         if (newGameState == GameState.menu)
         {
             menuCanvas.enabled = true;
+            gameCanvas.enabled = false;
+            gameOverCanvas.enabled = false;
         }
 
         else if (newGameState == GameState.inGame)
         {
             menuCanvas.enabled = false;
+            gameCanvas.enabled = true;
+            gameOverCanvas.enabled = false;
         }
 
         else if (newGameState == GameState.gameOver)
         {
             menuCanvas.enabled = false;
+            gameCanvas.enabled = false;
+            gameOverCanvas.enabled = true;
         }
 
         //Se asigna el estado nuevo
