@@ -88,6 +88,11 @@ public class GameManager : MonoBehaviour
         MovingWall.sharedInstance.StopWall();
 
     }
+    //Exit game. En moviles no se utiliza.
+    //public void ExitGame()
+    //{
+    //    Application.Quit();
+    //}
 
     //Encargado de cambiar el estado del juego
     void SetGameState(GameState newGameState)
