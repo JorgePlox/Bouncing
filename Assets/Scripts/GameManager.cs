@@ -6,7 +6,7 @@ using UnityEngine;
 //Posibles estados del juego
 public enum GameState
 {
-    menu,
+    pauseMenu,
     inGame,
     gameOver
 }
@@ -15,7 +15,7 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     //Variable para saber en que estado estamos. En principio queremos que esté en el menú
-    public GameState currentGameState = GameState.menu;
+    public GameState currentGameState = GameState.pauseMenu;
 
     //Variable que referencia al propio GameManager
     public static GameManager sharedInstance;
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        BackToMenu();
+        StartGame();
     }
 
     private void Update()
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
     //Se entra al menú y se guardan las velocidades del player para cuando se salga del menu
     public void BackToMenu()
     {
-        SetGameState(GameState.menu);
+        SetGameState(GameState.pauseMenu);
         PlayerController.sharedInstance.PauseVelocity();
 
         //wall
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
     //Encargado de cambiar el estado del juego
     void SetGameState(GameState newGameState)
     {
-        if (newGameState == GameState.menu)
+        if (newGameState == GameState.pauseMenu)
         {
             menuCanvas.enabled = true;
             gameCanvas.enabled = false;
@@ -121,4 +121,5 @@ public class GameManager : MonoBehaviour
         //Se asigna el estado nuevo
         this.currentGameState = newGameState;
     }
+
 }
