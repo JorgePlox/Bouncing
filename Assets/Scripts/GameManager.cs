@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     //Variables de los canvases
     public Canvas menuCanvas, gameCanvas, gameOverCanvas;
 
+    //CContador de coleccionables
+    public int collectedObjects = 0;
+
 
     private void Awake()
     {
@@ -56,6 +59,9 @@ public class GameManager : MonoBehaviour
 
         //wall
         MovingWall.sharedInstance.MoveWall();
+
+        //reiniciar monedas
+        collectedObjects = 0;
     }
 
 
@@ -121,5 +127,13 @@ public class GameManager : MonoBehaviour
         //Se asigna el estado nuevo
         this.currentGameState = newGameState;
     }
+
+    public void CollectObjects(int value)
+    {
+        this.collectedObjects += value;
+        Debug.Log("Puntos:" + collectedObjects);
+    }
+
+
 
 }
