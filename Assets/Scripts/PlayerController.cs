@@ -21,6 +21,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 startPosition;
 
 
+    //Level Mode
+
+    private int startingLives = 3;
+    private int startingCoins = 0;
+
+
+
 
     private void Awake()
     {
@@ -49,9 +56,6 @@ public class PlayerController : MonoBehaviour
         pauseVelocity = new Vector2(0f, 0f);
         ResumeVelocity();
         this.transform.position = startPosition;
-
-        LevelGenerator.sharedInstance.RemoveAllBlocks();
-        LevelGenerator.sharedInstance.GenerateInitialBLocks();
 
 
     }
@@ -147,15 +151,22 @@ public class PlayerController : MonoBehaviour
             return false;
     }
 
-
     //Matar al jugador
     public void Kill()
     {
         GameManager.sharedInstance.GameOver();
         this.animator.SetBool("isAlive", false);
 
-    }
+        //Dependiendo del tipo de juego 
+        switch (LevelManager.sharedInstance.currentGameMode)
+        {
+            case GameMode.levels:
+                //perder una vida
+                LossLife();
+                break;
+        }
 
+    }
 
     //Consigue la velocidad y luego pausa el movimiento
     public void PauseVelocity()
@@ -169,7 +180,6 @@ public class PlayerController : MonoBehaviour
         cuerpoPlayer.isKinematic = true;
 
     }
-
 
     //Ocupa la velocidad gardada en PauseVelocity para integrarsela nuevamente al player y permite que el objeto se mueva
     public void ResumeVelocity()
@@ -193,5 +203,31 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    //Actualiza la cantidad de monedas del jugador
+    public void SaveCoins(int newCoins)
+    {
+        int actualCoins = PlayerPrefs.GetInt("PlayerCoins", startingCoins);
+        int totalCoins = newCoins + actualCoins;
+        PlayerPrefs.SetInt("PlayerCoins",totalCoins);
+    }
+    //Agrega vidas al jugador
+    public void GetLife(int newLives)
+    {
+        int actualLives = PlayerPrefs.GetInt("PlayerLives", startingLives);
+        int totalLives = actualLives + newLives;
+        PlayerPrefs.SetInt("PlayerCoins", totalLives);
+    }
 
+    //Hace perder una vida al jugador
+    public void LossLife()
+    {
+        int actualLives = PlayerPrefs.GetInt("PlayerLives", startingLives);
+        int totalLives = actualLives -  1;
+        PlayerPrefs.SetInt("PlayerCoins", totalLives);
+    }
+
+
+
+    //Falta:
+    //No poder jugar con cero vidas
 }

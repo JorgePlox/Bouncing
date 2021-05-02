@@ -5,7 +5,7 @@ using UnityEngine;
 public class Collectables : MonoBehaviour
 {
 
-    bool isCollected = false;
+    //bool isCollected = false;
     public int value = 0;
 
     //Se decide activar y desactivar el objeto debido a que en el modo infinito, eliminar un coleccionable, lo eliminaría de todos
@@ -18,7 +18,7 @@ public class Collectables : MonoBehaviour
         //Activar collider
         this.GetComponent<CapsuleCollider2D>().enabled = true;
         //No se ha recogido el coleccionable
-        isCollected = false;
+        //isCollected = false;
 
     }
 
@@ -36,7 +36,7 @@ public class Collectables : MonoBehaviour
     //Recoger el colecionable
     void Collect()
     {
-        isCollected = true;
+        //isCollected = true;
         Hide();
     }
 

@@ -3,9 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum GameMode
+{
+    none,
+    infinite,
+    levels
+}
 public class LevelManager : MonoBehaviour
 {
-    static LevelManager sharedInstance;
+    public static LevelManager sharedInstance;
+    public GameMode currentGameMode;
 
 
     private void Awake()
@@ -16,5 +23,20 @@ public class LevelManager : MonoBehaviour
     public void ChangeScene(string scene)
     {
         SceneManager.LoadScene(scene);
+    }
+
+    public void SetGameModeNone() 
+    {
+        currentGameMode = GameMode.none;
+    }
+
+    public void SetGameModeLevels()
+    {
+        currentGameMode = GameMode.levels;
+    }
+
+    public void SetGameModeInfinite()
+    {
+        currentGameMode = GameMode.infinite;
     }
 }

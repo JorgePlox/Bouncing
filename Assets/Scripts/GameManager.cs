@@ -12,6 +12,7 @@ public enum GameState
 }
 
 
+
 public class GameManager : MonoBehaviour
 {
     //Variable para saber en que estado estamos. En principio queremos que esté en el menú
@@ -35,20 +36,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartGame();
+        ResetGame();
     }
 
-    private void Update()
-    {
-        //if (Input.GetButtonDown("Start") && currentGameState == GameState.menu)
-        //    StartGame();
-
-        //else if (Input.GetButtonDown("Start") && currentGameState == GameState.inGame)
-        //    BackToMenu();
-
-        //else if (Input.GetButtonDown("Start") && currentGameState == GameState.gameOver)
-        //    ResetGame();
-    }
 
 
     //Se utiliza para salir del menu. Entra al juego y le da la velocidad pausa al player
@@ -57,23 +47,49 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.inGame);
         PlayerController.sharedInstance.ResumeVelocity();
 
-        //wall
-        MovingWall.sharedInstance.MoveWall();
 
-        //reiniciar monedas
-        collectedObjects = 0;
+        //Dependiendo del tipo de juego se inicia la Wall
+        switch (LevelManager.sharedInstance.currentGameMode)
+        {
+            case GameMode.infinite:
+                //wall
+                MovingWall.sharedInstance.MoveWall();
+                break;
+        }
+
+
     }
 
 
     //Se reinicia el jeugo y sus variables
     public void ResetGame()
     {
+
         PlayerController.sharedInstance.StartGame();
+
+        
+        //Dependiendo del tipo de juego
+        switch (LevelManager.sharedInstance.currentGameMode)
+        {
+            case GameMode.infinite:
+                //Se remueven y generan los bloques del modo infinito
+                LevelGenerator.sharedInstance.RemoveAllBlocks();
+                LevelGenerator.sharedInstance.GenerateInitialBLocks();
+
+                //wall
+                MovingWall.sharedInstance.ResetWallPosition();
+                MovingWall.sharedInstance.MoveWall();
+                break;
+            case GameMode.levels:
+                break;
+        }
+
         SetGameState(GameState.inGame);
         CameraFollow.sharedinstance.ResetCameraPosition();
 
-        //wall
-        MovingWall.sharedInstance.ResetWallPosition();
+        //reiniciar monedas
+        collectedObjects = 0;
+
     }
 
 
@@ -90,15 +106,17 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.pauseMenu);
         PlayerController.sharedInstance.PauseVelocity();
 
-        //wall
-        MovingWall.sharedInstance.StopWall();
+        //Dependiendo del tipo de juego se para la Wall
+        switch (LevelManager.sharedInstance.currentGameMode)
+        {
+            case GameMode.infinite:
+                //wall
+                MovingWall.sharedInstance.StopWall();
+                break;
+        }
+
 
     }
-    //Exit game. En moviles no se utiliza.
-    //public void ExitGame()
-    //{
-    //    Application.Quit();
-    //}
 
     //Encargado de cambiar el estado del juego
     void SetGameState(GameState newGameState)
