@@ -24,8 +24,14 @@ public class GameManager : MonoBehaviour
     //Variables de los canvases
     public Canvas menuCanvas, gameCanvas, gameOverCanvas;
 
-    //CContador de coleccionables
+    //Contador de coleccionables
     public int collectedObjects = 0;
+
+    //TimesElapsed
+    public float timeElapsed = 0f;
+    public float levelTime = 300f;
+    public float remainingTime = 0f;
+
 
 
     private void Awake()
@@ -37,6 +43,11 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ResetGame();
+    }
+
+    public void Update()
+    {
+        CheckTime();
     }
 
 
@@ -67,7 +78,11 @@ public class GameManager : MonoBehaviour
 
         PlayerController.sharedInstance.StartGame();
 
-        
+        //Reiniciar tiempos
+        timeElapsed = 0f;
+        remainingTime = 0f;
+
+
         //Dependiendo del tipo de juego
         switch (LevelManager.sharedInstance.currentGameMode)
         {
@@ -149,9 +164,25 @@ public class GameManager : MonoBehaviour
     public void CollectObjects(int value)
     {
         this.collectedObjects += value;
-        Debug.Log("Puntos:" + collectedObjects);
     }
 
+
+    private void CheckTime()
+    {
+        timeElapsed += Time.deltaTime;
+        remainingTime = levelTime - timeElapsed;
+        
+        switch (LevelManager.sharedInstance.currentGameMode)
+        {
+            case GameMode.levels:
+                if (remainingTime <= 0 && currentGameState == GameState.inGame)
+                { 
+                    PlayerController.sharedInstance.Kill();
+                }
+                break;
+        }
+
+    }
 
 
 }

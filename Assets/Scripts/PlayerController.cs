@@ -115,7 +115,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     //Genera el movimiento del personaje dependiendo de la dirección que se le indique
     void Move(string direction)
     {
@@ -163,6 +162,14 @@ public class PlayerController : MonoBehaviour
             case GameMode.levels:
                 //perder una vida
                 LossLife();
+                break;
+
+            case GameMode.infinite:
+                //guardar mejor tiempo
+                if (GameManager.sharedInstance.timeElapsed > PlayerPrefs.GetFloat("BestTimeInfinite", 0))
+                { 
+                    PlayerPrefs.SetFloat("BestTimeInfinite", GameManager.sharedInstance.timeElapsed);
+                }
                 break;
         }
 
@@ -215,7 +222,7 @@ public class PlayerController : MonoBehaviour
     {
         int actualLives = PlayerPrefs.GetInt("PlayerLives", startingLives);
         int totalLives = actualLives + newLives;
-        PlayerPrefs.SetInt("PlayerCoins", totalLives);
+        PlayerPrefs.SetInt("PlayerLives", totalLives);
     }
 
     //Hace perder una vida al jugador
@@ -223,9 +230,14 @@ public class PlayerController : MonoBehaviour
     {
         int actualLives = PlayerPrefs.GetInt("PlayerLives", startingLives);
         int totalLives = actualLives -  1;
-        PlayerPrefs.SetInt("PlayerCoins", totalLives);
+        PlayerPrefs.SetInt("PlayerLives", totalLives);
     }
 
+
+    public int GetLivesNumber()
+    { 
+    return PlayerPrefs.GetInt("PlayerLives", startingLives);
+    }
 
 
     //Falta:
