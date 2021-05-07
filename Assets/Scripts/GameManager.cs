@@ -47,7 +47,10 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-        CheckTime();
+        if (currentGameState == GameState.inGame)
+        {
+            CheckTime();
+        }
     }
 
 
@@ -57,6 +60,7 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(GameState.inGame);
         PlayerController.sharedInstance.ResumeVelocity();
+        Time.timeScale = 1;
 
 
         //Dependiendo del tipo de juego se inicia la Wall
@@ -75,7 +79,7 @@ public class GameManager : MonoBehaviour
     //Se reinicia el jeugo y sus variables
     public void ResetGame()
     {
-
+        Time.timeScale = 1;
         PlayerController.sharedInstance.StartGame();
 
         //Reiniciar tiempos
@@ -111,6 +115,7 @@ public class GameManager : MonoBehaviour
     //Se acaba el juego 
     public void GameOver()
     {
+
         SetGameState(GameState.gameOver);
         PlayerController.sharedInstance.DeathVelocity();
     }
@@ -120,6 +125,7 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(GameState.pauseMenu);
         PlayerController.sharedInstance.PauseVelocity();
+        Time.timeScale = 0;
 
         //Dependiendo del tipo de juego se para la Wall
         switch (LevelManager.sharedInstance.currentGameMode)
