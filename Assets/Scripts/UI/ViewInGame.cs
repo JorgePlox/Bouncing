@@ -17,7 +17,7 @@ public class ViewInGame : MonoBehaviour
         {
             if (coinsLabel != null)
             {
-                int currentObjects = GameManager.sharedInstance.collectedObjects;
+                int currentObjects = PlayerPrefs.GetInt("PlayerCoins", 0);
                 coinsLabel.text = currentObjects.ToString();
             }
 

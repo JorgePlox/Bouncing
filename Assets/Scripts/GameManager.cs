@@ -24,8 +24,6 @@ public class GameManager : MonoBehaviour
     //Variables de los canvases
     public Canvas menuCanvas, gameCanvas, gameOverCanvas;
 
-    //Contador de coleccionables
-    public int collectedObjects = 0;
 
     //TimesElapsed
     public float timeElapsed = 0f;
@@ -106,9 +104,6 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.inGame);
         CameraFollow.sharedinstance.ResetCameraPosition();
 
-        //reiniciar monedas
-        collectedObjects = 0;
-
     }
 
 
@@ -167,10 +162,6 @@ public class GameManager : MonoBehaviour
         this.currentGameState = newGameState;
     }
 
-    public void CollectObjects(int value)
-    {
-        this.collectedObjects += value;
-    }
 
 
     private void CheckTime()

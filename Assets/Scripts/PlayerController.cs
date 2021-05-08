@@ -256,10 +256,18 @@ public class PlayerController : MonoBehaviour
     }
 
     //Actualiza la cantidad de monedas del jugador
-    public void SaveCoins(int newCoins)
+    public void addCoins(int newCoins)
     {
+
         int actualCoins = PlayerPrefs.GetInt("PlayerCoins", startingCoins);
         int totalCoins = newCoins + actualCoins;
+
+        if (totalCoins >= 100)
+        {
+            totalCoins -= 100;
+            GetLife(1);
+        }
+
         PlayerPrefs.SetInt("PlayerCoins",totalCoins);
     }
     //Agrega vidas al jugador
@@ -275,7 +283,18 @@ public class PlayerController : MonoBehaviour
     {
         int actualLives = PlayerPrefs.GetInt("PlayerLives", startingLives);
         int totalLives = actualLives -  1;
+
+        if (totalLives <= 0)
+        {
+            totalLives = startingLives;
+            LevelManager.sharedInstance.ChangeScene("MainMenu");
+            LevelManager.sharedInstance.restartZone();
+
+        }
+
         PlayerPrefs.SetInt("PlayerLives", totalLives);
+        
+
     }
 
 

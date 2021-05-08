@@ -2688,7 +2688,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2c1902f8ed582994a92f85a56b93d07f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3ca8a776a4150e946bcbd1e755f69572, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3926,6 +3926,8 @@ MonoBehaviour:
   movementForce: 7
   maxSpeed: 4
   animator: {fileID: 7042815189952351092}
+  sonidoSalto: {fileID: 0}
+  deathSound: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64

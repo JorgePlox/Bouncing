@@ -25,9 +25,9 @@ public class Collectables : MonoBehaviour
     void Show()
     {
         //Activar sprite y también la animación
-        this.GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<SpriteRenderer>().enabled = true;
         //Activar collider
-        this.GetComponent<CapsuleCollider2D>().enabled = true;
+        GetComponent<CapsuleCollider2D>().enabled = true;
         //No se ha recogido el coleccionable
         //isCollected = false;
 
@@ -37,9 +37,9 @@ public class Collectables : MonoBehaviour
     void Hide()
     {
         //Desactivar sprite y también la animación
-        this.GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
         //Desactivar collider
-        this.GetComponent<CapsuleCollider2D>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
 
 
     }
@@ -62,7 +62,7 @@ public class Collectables : MonoBehaviour
         if (otherCollider.tag == "Player")
         {
             Collect();
-            GameManager.sharedInstance.CollectObjects(value);
+            PlayerController.sharedInstance.addCoins(value);
         }
     }
 }
