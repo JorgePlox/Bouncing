@@ -8,9 +8,20 @@ public class Collectables : MonoBehaviour
     //bool isCollected = false;
     public int value = 0;
 
+
+    //Sonido
+    public AudioClip sonido;
+    private AudioSource audioSource;
+
     //Se decide activar y desactivar el objeto debido a que en el modo infinito, eliminar un coleccionable, lo eliminaría de todos
     //los trozos de nivel
     //Activar el collecionable y su collider
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+
     void Show()
     {
         //Activar sprite y también la animación
@@ -38,6 +49,12 @@ public class Collectables : MonoBehaviour
     {
         //isCollected = true;
         Hide();
+        
+        
+        if (sonido != null)
+        {
+            audioSource.PlayOneShot(sonido);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D otherCollider)

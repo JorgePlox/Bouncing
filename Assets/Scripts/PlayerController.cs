@@ -20,12 +20,16 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 startPosition;
 
+    //Audio
+    public AudioClip sonidoSalto;
+    public AudioClip deathSound;
+    private AudioSource audioSource;
+
 
     //Level Mode
 
     private int startingLives = 3;
     private int startingCoins = 0;
-
 
 
 
@@ -35,6 +39,8 @@ public class PlayerController : MonoBehaviour
         cuerpoPlayer = GetComponent<Rigidbody2D>();
         startPosition = this.transform.position;
         ballMaterial = cuerpoPlayer.sharedMaterial;
+
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -65,17 +71,20 @@ public class PlayerController : MonoBehaviour
     {
         //Solo vamos a dejar que salte si el juego está en ingame
         if (GameManager.sharedInstance.currentGameState == GameState.inGame)
-        {
+        { 
             //Verificar si se presiona "espacio" para saltar
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") || VirtualJoystick.sharedInstance.moveJump)
             {
                 Jump();
+                VirtualJoystick.sharedInstance.moveJump = false;
+
             }
 
             //Se le asigna a la animación, en isGrounded, el valor de IsTouchingTheGround
             animator.SetBool("isGrounded", IsTouchingTheGround());
             animator.SetFloat("ballSpeed", cuerpoPlayer.velocity.x);
             animator.SetBool("isWalking", IsMoving());
+
         }
     }
 
@@ -85,7 +94,9 @@ public class PlayerController : MonoBehaviour
         //Solo vamos a dejar que se mueva si el juego está en ingame
         if (GameManager.sharedInstance.currentGameState == GameState.inGame)
         {
-            if (Input.GetAxisRaw("Horizontal")==1)
+            //Con Botones para android
+        #if UNITY_ANDROID
+        if (VirtualJoystick.sharedInstance.moveRight)
             {
                 if (cuerpoPlayer.velocity.x >= maxSpeed) { }
 
@@ -93,16 +104,38 @@ public class PlayerController : MonoBehaviour
                     Move("right");
             }
 
-            if (Input.GetAxisRaw("Horizontal")==-1)
+        else if (VirtualJoystick.sharedInstance.moveLeft)
             {
                 if (cuerpoPlayer.velocity.x <= -maxSpeed) { }
 
                 else
                     Move("left");
             }
+
+
+#else
+            {
+                if (Input.GetAxisRaw("Horizontal") == 1)
+                {
+                    if (cuerpoPlayer.velocity.x >= maxSpeed) { }
+
+                    else
+                        Move("right");
+                }
+
+                if (Input.GetAxisRaw("Horizontal") == -1)
+                {
+                    if (cuerpoPlayer.velocity.x <= -maxSpeed) { }
+
+                    else
+                        Move("left");
+                }
+            }
+#endif
         }
 
     }
+
 
 
     //Salto
@@ -112,6 +145,12 @@ public class PlayerController : MonoBehaviour
         if (IsTouchingTheGround())
         {
             cuerpoPlayer.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            if (sonidoSalto != null)
+            {
+                audioSource.PlayOneShot(sonidoSalto);
+            }
+
+
         }
     }
 
@@ -153,8 +192,14 @@ public class PlayerController : MonoBehaviour
     //Matar al jugador
     public void Kill()
     {
+
         GameManager.sharedInstance.GameOver();
         this.animator.SetBool("isAlive", false);
+
+        if (deathSound != null)
+        {
+            audioSource.PlayOneShot(deathSound);
+        }
 
         //Dependiendo del tipo de juego 
         switch (LevelManager.sharedInstance.currentGameMode)
