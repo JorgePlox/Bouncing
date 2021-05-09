@@ -8,7 +8,7 @@ public class TriggerMovement : MonoBehaviour
     public bool movingRight = false;
     private void OnTriggerEnter2D(Collider2D otherCollider)
     {
-        if (otherCollider.tag == "Collectable" || otherCollider.tag == "Player")
+        if (otherCollider.tag == "Collectable" || otherCollider.tag == "Player" || otherCollider.tag == "EnemyActivator")
             return;
 
         movingRight = !movingRight;

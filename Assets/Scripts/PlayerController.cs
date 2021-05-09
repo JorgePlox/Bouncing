@@ -193,9 +193,6 @@ public class PlayerController : MonoBehaviour
     public void Kill()
     {
 
-        GameManager.sharedInstance.GameOver();
-        this.animator.SetBool("isAlive", false);
-
         if (deathSound != null)
         {
             audioSource.PlayOneShot(deathSound);
@@ -217,6 +214,9 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
         }
+
+        GameManager.sharedInstance.GameOver();
+        this.animator.SetBool("isAlive", false);
 
     }
 
@@ -289,10 +289,13 @@ public class PlayerController : MonoBehaviour
             totalLives = startingLives;
             LevelManager.sharedInstance.ChangeScene("MainMenu");
             LevelManager.sharedInstance.restartZone();
+            PlayerPrefs.SetInt("PlayerCoins", startingCoins);
+
 
         }
 
         PlayerPrefs.SetInt("PlayerLives", totalLives);
+
         
 
     }
