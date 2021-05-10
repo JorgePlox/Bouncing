@@ -1906,9 +1906,8 @@ MonoBehaviour:
   menuCanvas: {fileID: 8292431122733506306}
   gameCanvas: {fileID: 8292431123437272668}
   gameOverCanvas: {fileID: 8292431121948828661}
-  collectedObjects: 0
   timeElapsed: 0
-  levelTime: 300
+  levelTime: 180
   remainingTime: 0
 --- !u!1 &8292431122341895077
 GameObject:
@@ -2180,7 +2179,7 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 100
+    m_MaxSize: 71
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1

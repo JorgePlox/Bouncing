@@ -192,31 +192,33 @@ public class PlayerController : MonoBehaviour
     //Matar al jugador
     public void Kill()
     {
-
-        if (deathSound != null)
+        if (GameManager.sharedInstance.currentGameState == GameState.inGame)
         {
-            audioSource.PlayOneShot(deathSound);
+            if (deathSound != null)
+            {
+                audioSource.PlayOneShot(deathSound);
+            }
+
+            //Dependiendo del tipo de juego 
+            switch (LevelManager.sharedInstance.currentGameMode)
+            {
+                case GameMode.levels:
+                    //perder una vida
+                    LossLife();
+                    break;
+
+                case GameMode.infinite:
+                    //guardar mejor tiempo
+                    if (GameManager.sharedInstance.timeElapsed > PlayerPrefs.GetFloat("BestTimeInfinite", 0))
+                    {
+                        PlayerPrefs.SetFloat("BestTimeInfinite", GameManager.sharedInstance.timeElapsed);
+                    }
+                    break;
+            }
+
+            GameManager.sharedInstance.GameOver();
+            this.animator.SetBool("isAlive", false);
         }
-
-        //Dependiendo del tipo de juego 
-        switch (LevelManager.sharedInstance.currentGameMode)
-        {
-            case GameMode.levels:
-                //perder una vida
-                LossLife();
-                break;
-
-            case GameMode.infinite:
-                //guardar mejor tiempo
-                if (GameManager.sharedInstance.timeElapsed > PlayerPrefs.GetFloat("BestTimeInfinite", 0))
-                { 
-                    PlayerPrefs.SetFloat("BestTimeInfinite", GameManager.sharedInstance.timeElapsed);
-                }
-                break;
-        }
-
-        GameManager.sharedInstance.GameOver();
-        this.animator.SetBool("isAlive", false);
 
     }
 
