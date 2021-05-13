@@ -19,7 +19,8 @@ public class LevelManager : MonoBehaviour
     //https://www.google.com/search?q=lock+and+unlock+level+unity&oq=unity+lock+and+unlock+le&aqs=chrome.1.69i57j0i22i30.5109j0j9&sourceid=chrome&ie=UTF-8#kpvalbx=_AmyPYPbRIOKq1sQP_JqsyAE15
 
     public Button[] levelButtons;
-    private int fristLevel = 3;
+    private int fristLevel = 4;
+    private int zoneCheckpoint = 8;
     private int nextSceneLoad;
 
 
@@ -33,7 +34,7 @@ public class LevelManager : MonoBehaviour
         int currentLevel = PlayerPrefs.GetInt("CurrentLevel", fristLevel);
 
         for (int i=0; i <levelButtons.Length; i++)
-        { if (i + 3 > currentLevel)
+        { if (i + 4 > currentLevel)
             {
                 levelButtons[i].interactable = false;
             } 
@@ -69,8 +70,9 @@ public class LevelManager : MonoBehaviour
         {
             ChangeScene("LevelMenu");
 
-            //Ver si se desbloqueó un nivel
-            if (nextSceneLoad > PlayerPrefs.GetInt("CurrentLevel", fristLevel))
+            //Ver si se desbloqueó un nivel 
+            //El 12 es porque no quiero desbloquear nada después del 9 (9+4 == 13). Borrar && nextSceneLoad != 12 cuando saque el verdadero 9
+            if (nextSceneLoad > PlayerPrefs.GetInt("CurrentLevel", fristLevel) && nextSceneLoad != 13)
             {
                 PlayerPrefs.SetInt("CurrentLevel", nextSceneLoad);
             }
@@ -86,6 +88,13 @@ public class LevelManager : MonoBehaviour
 
     public void restartZone()
     {
-        PlayerPrefs.SetInt("CurrentLevel", fristLevel);
+        if (PlayerPrefs.GetInt("CurrentLevel", fristLevel) >= zoneCheckpoint)
+        {
+            PlayerPrefs.SetInt("CurrentLevel", zoneCheckpoint);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("CurrentLevel", fristLevel);
+        }
     }
 }

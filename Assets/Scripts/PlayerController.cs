@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
     //Level Mode
 
-    private int startingLives = 3;
+    private int startingLives = 5;
     private int startingCoins = 0;
 
 
@@ -288,8 +288,9 @@ public class PlayerController : MonoBehaviour
 
         if (totalLives <= 0)
         {
+
             totalLives = startingLives;
-            LevelManager.sharedInstance.ChangeScene("MainMenu");
+            LevelManager.sharedInstance.ChangeScene("GameOver");
             LevelManager.sharedInstance.restartZone();
             PlayerPrefs.SetInt("PlayerCoins", startingCoins);
 
@@ -308,7 +309,4 @@ public class PlayerController : MonoBehaviour
     return PlayerPrefs.GetInt("PlayerLives", startingLives);
     }
 
-
-    //Falta:
-    //No poder jugar con cero vidas
 }
