@@ -6333,7 +6333,7 @@ PrefabInstance:
       value: UI_and_Manager
       objectReference: {fileID: 0}
     - target: {fileID: 5329617774298531060, guid: 72346b6cf24f8ea448d4a9b6d5a9f3f5, type: 3}
-      propertyPath: tarjet
+      propertyPath: target
       value: 
       objectReference: {fileID: 6745884900868289943}
     - target: {fileID: 6416938688329437570, guid: 72346b6cf24f8ea448d4a9b6d5a9f3f5, type: 3}

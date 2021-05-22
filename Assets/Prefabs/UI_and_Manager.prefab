@@ -2096,13 +2096,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b5ec51a9f6c3274e911397fc2bb4cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tarjet: {fileID: 0}
-  offset: {x: 4, y: -2}
+  target: {fileID: 0}
+  offset: {x: 4, y: 0}
   dampTime: 0.3
-  velocity: {x: 0, y: 0, z: 0}
+  velocity: {x: -0.13612139, y: -1.6582283, z: 0}
   rightLimit: 96.8
   leftLimit: -5.8
-  topLimit: 3
+  topLimit: -1.9
   bottomLimit: -2
 --- !u!1 &5329617774348436374
 GameObject:

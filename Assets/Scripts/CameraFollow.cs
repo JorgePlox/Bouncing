@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
 
-    public Transform tarjet;
+    public Transform target;
 
     public Vector2 offset = new Vector2(7f, -1f);
 
@@ -33,24 +33,25 @@ public class CameraFollow : MonoBehaviour
     void Update()
     {
 
-        Vector3 destination = new Vector3(tarjet.position.x + offset.x, offset.y, -10);
+            Vector3 destination = new Vector3(target.position.x + offset.x, target.position.y + offset.y, -10);
 
-        //if (this.transform.position.x - destination.x > 0)
-        //    destination.x = this.transform.position.x;
+            //if (this.transform.position.x - destination.x > 0)
+            //    destination.x = this.transform.position.x;
 
-        this.transform.position = Vector3.SmoothDamp(this.transform.position, destination, ref velocity, dampTime);
+            this.transform.position = Vector3.SmoothDamp(this.transform.position, destination, ref velocity, dampTime);
 
 
-        switch (LevelManager.sharedInstance.currentGameMode)
-        {
-            case GameMode.levels:
-                transform.position = new Vector3(
-                    Mathf.Clamp(transform.position.x, leftLimit, rightLimit),
-                    Mathf.Clamp(transform.position.y, bottomLimit, topLimit),
-                    transform.position.z
-                    );
-                break;
-        }
+            switch (LevelManager.sharedInstance.currentGameMode)
+            {
+                case GameMode.levels:
+                    transform.position = new Vector3(
+                        Mathf.Clamp(transform.position.x, leftLimit, rightLimit),
+                        Mathf.Clamp(transform.position.y, bottomLimit, topLimit),
+                        transform.position.z
+                        );
+                    break;
+            }
+
 
     }
 
@@ -66,8 +67,29 @@ public class CameraFollow : MonoBehaviour
 
     public void ResetCameraPosition()
     {
-        Vector3 destination = new Vector3(tarjet.position.x + offset.x, offset.y, -10);
+        Vector3 destination = new Vector3(target.position.x + offset.x, offset.y, -10);
 
         this.transform.position = destination;
+    }
+
+    public IEnumerator CameraShake(float duration, float magnitude)
+    {
+        Vector3 originalPos = transform.position;
+
+        float elapsed = 0.0f;
+
+
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+            transform.position = new Vector3(originalPos.x + x, originalPos.y + y, transform.position.z);
+
+            elapsed += Time.deltaTime;
+
+            yield return null;
+
+        }
+
     }
 }

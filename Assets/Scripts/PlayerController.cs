@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour
     private int startingCoins = 0;
 
 
+    //Particle System
+    public ParticleSystem jump_ParticleSystem;
+    [SerializeField] float landingVelocity = -5.5f;
+
 
     private void Awake()
     {
@@ -84,6 +88,9 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isGrounded", IsTouchingTheGround());
             animator.SetFloat("ballSpeed", cuerpoPlayer.velocity.x);
             animator.SetBool("isWalking", IsMoving());
+
+            //Verificamos si el personaje ha aterrizado
+            Landing();
 
         }
     }
@@ -145,6 +152,8 @@ public class PlayerController : MonoBehaviour
         if (IsTouchingTheGround())
         {
             cuerpoPlayer.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            animator.Play("Jump");
+
             if (sonidoSalto != null)
             {
                 audioSource.PlayOneShot(sonidoSalto);
@@ -272,6 +281,7 @@ public class PlayerController : MonoBehaviour
 
         PlayerPrefs.SetInt("PlayerCoins",totalCoins);
     }
+    
     //Agrega vidas al jugador
     public void GetLife(int newLives)
     {
@@ -299,14 +309,28 @@ public class PlayerController : MonoBehaviour
 
         PlayerPrefs.SetInt("PlayerLives", totalLives);
 
-        
-
     }
 
-
+    //Entrega la cantidad de vidas del jugador
     public int GetLivesNumber()
     { 
     return PlayerPrefs.GetInt("PlayerLives", startingLives);
     }
 
+    //Crea las particulas del salto y aterrizaje
+    private void CreateJumpParticles()
+    { 
+        jump_ParticleSystem.Play();
+    }
+
+    //Verifica si el jugador acaba de aterrizar
+    private void Landing()
+    {
+
+
+        if (Physics2D.Raycast(this.transform.position, Vector2.down, 0.7f, groundLayer) && cuerpoPlayer.velocity.y < landingVelocity)
+        {
+            CreateJumpParticles();
+        }
+    }
 }

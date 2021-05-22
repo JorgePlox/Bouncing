@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     public float runningSpeed = 1.5f;
     private Rigidbody2D enemyRigdbody;
+    
     //Para girar la animación
     public bool goingRight = false;
 
