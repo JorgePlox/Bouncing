@@ -23,6 +23,10 @@ public class LevelManager : MonoBehaviour
     private int zoneCheckpoint = 8;
     private int nextSceneLoad;
 
+    //Transition
+    [SerializeField] float transitionDuration = 0.5f;
+    public Animator transition;
+
 
     private void Awake()
     {
@@ -39,12 +43,24 @@ public class LevelManager : MonoBehaviour
                 levelButtons[i].interactable = false;
             } 
         }
+
     }
 
     public void ChangeScene(string scene)
     {
+        StartCoroutine(TransitionScene(scene));
+        //SceneManager.LoadScene(scene);
+    }
+
+    //No me funciono bien la transición
+    IEnumerator TransitionScene(string scene)
+    {
+        transition.SetTrigger("StartTransition");
+        yield return new WaitForSeconds(transitionDuration);
+
         SceneManager.LoadScene(scene);
     }
+
 
     public void SetGameModeNone() 
     {
