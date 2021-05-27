@@ -33,23 +33,28 @@ public class CameraFollow : MonoBehaviour
     void Update()
     {
 
-            Vector3 destination = new Vector3(target.position.x + offset.x, target.position.y + offset.y, -10);
-
-            //if (this.transform.position.x - destination.x > 0)
-            //    destination.x = this.transform.position.x;
-
-            this.transform.position = Vector3.SmoothDamp(this.transform.position, destination, ref velocity, dampTime);
 
 
             switch (LevelManager.sharedInstance.currentGameMode)
             {
+                case GameMode.infinite:
+                    Vector3 destination2 = new Vector3(target.position.x + offset.x, offset.y, -10);
+
+                this.transform.position = Vector3.SmoothDamp(this.transform.position, destination2, ref velocity, dampTime);
+                    break;
+
                 case GameMode.levels:
-                    transform.position = new Vector3(
+                Vector3 destination = new Vector3(target.position.x + offset.x, target.position.y + offset.y, -10);
+
+                this.transform.position = Vector3.SmoothDamp(this.transform.position, destination, ref velocity, dampTime);
+                transform.position = new Vector3(
                         Mathf.Clamp(transform.position.x, leftLimit, rightLimit),
                         Mathf.Clamp(transform.position.y, bottomLimit, topLimit),
-                        transform.position.z
-                        );
+                        transform.position.z);
                     break;
+                case GameMode.none:
+                break;
+
             }
 
 

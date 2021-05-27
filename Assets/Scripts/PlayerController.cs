@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
         {
             //Con Botones para android
         #if UNITY_ANDROID
-        if (VirtualJoystick.sharedInstance.moveRight)
+        if (VirtualJoystick.sharedInstance.moveRight || Input.GetAxisRaw("Horizontal") == 1)
             {
                 if (cuerpoPlayer.velocity.x >= maxSpeed) { }
 
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
                     Move("right");
             }
 
-        else if (VirtualJoystick.sharedInstance.moveLeft)
+        else if (VirtualJoystick.sharedInstance.moveLeft || Input.GetAxisRaw("Horizontal") == -1)
             {
                 if (cuerpoPlayer.velocity.x <= -maxSpeed) { }
 
