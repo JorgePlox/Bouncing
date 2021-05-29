@@ -26,7 +26,8 @@ public class LevelManager : MonoBehaviour
     //Transition
     [SerializeField] float transitionDuration = 0.5f;
     public Animator transition;
-
+    [SerializeField] AudioSource m_AudioSource;
+    [SerializeField] AudioClip transitionClip;
 
     private void Awake()
     {
@@ -56,6 +57,9 @@ public class LevelManager : MonoBehaviour
     IEnumerator TransitionScene(string scene)
     {
         transition.SetTrigger("StartTransition");
+        if (m_AudioSource != null && transitionClip != null)
+            m_AudioSource.PlayOneShot(transitionClip);
+        
         yield return new WaitForSeconds(transitionDuration);
 
         SceneManager.LoadScene(scene);

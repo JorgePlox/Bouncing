@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Collectable
   - EnemyActivator
+  - Music
   layers:
   - Default
   - TransparentFX
