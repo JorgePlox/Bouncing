@@ -72,7 +72,7 @@ TextureImporter:
       213: -298996508967366585
     second: TileSuelo 1_22
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -93,6 +93,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -102,8 +103,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -131,6 +132,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -158,6 +160,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -664,6 +678,30 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      TileSuelo 1_1: -332453824855380982
+      TileSuelo 1_17: -1634559532288014930
+      TileSuelo 1_5: -8967524195023301623
+      TileSuelo 1_19: 739430220824819950
+      TileSuelo 1_9: -3235268631059815733
+      TileSuelo 1_11: 6255781495490784605
+      TileSuelo 1_3: 2256441792041652196
+      TileSuelo 1_15: 2306860852298296
+      TileSuelo 1_4: 2144200959873117721
+      TileSuelo 1_14: 1850509221555140839
+      TileSuelo 1_6: 5089927196826512998
+      TileSuelo 1_22: -298996508967366585
+      TileSuelo 1_10: 2156135506971932863
+      TileSuelo 1_13: -1823270622756719674
+      TileSuelo 1_7: -6497437584903696289
+      TileSuelo 1_21: -4759416862097942464
+      TileSuelo 1_0: 5053255627718239521
+      TileSuelo 1_8: 5369739212598794705
+      TileSuelo 1_20: -3623467657284635604
+      TileSuelo 1_2: 7479210116550906014
+      TileSuelo 1_12: 5470170687737349146
+      TileSuelo 1_16: -6274600722295363618
+      TileSuelo 1_18: 567032866493996202
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -138,7 +138,7 @@ TextureImporter:
       213: -4818214058045954183
     second: Space
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -159,6 +159,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -168,8 +169,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -197,6 +198,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -224,6 +226,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -1192,6 +1206,52 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      3: -6953311899740606831
+      0: 6062061728753242320
+      P: 8110872622370531652
+      Y: 2302416298802908101
+      H: -6428968714540634253
+      L: 6128661765030043276
+      6: -808104693665983247
+      S: 9051339576351642487
+      5: 6973202965361551963
+      R: 4327304784903276742
+      D: -9016761822049355607
+      Barra: -5315508225494794613
+      Z: -2929774443188164315
+      K: -334563461203360544
+      M: -8816642140368681516
+      F: 4001577451856341619
+      W: 353986963789834164
+      8: 2934149142748236151
+      Punto: -7355631510157407105
+      DosPuntos: 8101743958316842797
+      2: 4438209180120156844
+      C: 7879858841154057294
+      Q: 3386178094549484791
+      J: -6845646395081414833
+      9: 7608100028349204110
+      4: -152630008251837123
+      G: 467977570280997345
+      E: -7963978092575404019
+      X: -2507098554458684224
+      B: -5031514674137951672
+      U: -8097556033952139033
+      I: 5437823458490768691
+      O: 4242490089086487857
+      Exclam: -467703260619501889
+      PuntoComa: 3868080126678108369
+      T: 4433578389501331461
+      Space: -4818214058045954183
+      A: 288294950799989023
+      1: 1362972028139747930
+      7: -3754673018416201414
+      V: -1066097124151488553
+      Interro: 5375341743926369702
+      Gato: 2068222038542339954
+      N: -6651950946665414918
+      Coma: -5563708257758385648
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
